@@ -36,5 +36,5 @@ node_modules/
 # Docker
 **/db_data/
 
-# Others 
+# Others
 INSTRUCTIONS.md
