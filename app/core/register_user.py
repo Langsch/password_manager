@@ -80,6 +80,7 @@ def register_user(email: str, password: str, confirmation: str) -> JSONResponse:
                     WHERE u."email" = %(email)s
                 )
             """
+            print(f"{conn=}, {cursor=}")
             cursor.execute(sql, {"email": email})
             if cursor.fetchone() == {"exists": True}:
                 return JSONResponse(

@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS "user";
 
 -- Create user table with UUID
 CREATE TABLE "user" (
-  "id" UUID PRIMARY KEY,
+  "id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   "email" VARCHAR(255) UNIQUE NOT NULL,
   "password" VARCHAR(255) NOT NULL,
   "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -16,16 +16,17 @@ CREATE TABLE "user" (
 
 -- Create vault table
 CREATE TABLE "vault" (
-  "id" INTEGER PRIMARY KEY,
+  "id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   "user_id" UUID NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
-  "metadata" JSONB,
+  "password" VARCHAR(255) NOT NULL,
+  "passphrase" VARCHAR(255) NOT NULL,
   "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   "last_accessed_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create login_log table
 CREATE TABLE "login_log" (
-  "id" INTEGER PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "user_id" UUID NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
   "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

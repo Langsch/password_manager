@@ -1,5 +1,5 @@
 import uuid
-import json
+from typing import Optional, Dict, Any
 from pydantic import BaseModel
 
 class Vault(BaseModel):
@@ -7,4 +7,9 @@ class Vault(BaseModel):
     user_id: uuid.UUID
     passphrase: str
     password: str
-    metadata: json.JSONDecoder
+    metadata: Optional[Dict[str, Any]] = None  # Changed from json.JSONDecoder
+
+
+class VaultCreationPayload(BaseModel):
+    user_id: uuid.UUID
+    passphrase: str
