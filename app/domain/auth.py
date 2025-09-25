@@ -1,3 +1,4 @@
+import uuid
 from pydantic import BaseModel
 
 class RegistrationPayload(BaseModel):
@@ -6,7 +7,7 @@ class RegistrationPayload(BaseModel):
     confirmation: str
 
 class User(BaseModel):
-    id: int
+    id: uuid.UUID
     email: str
     password: str
     created_at: str  # Or use datetime if you have proper types
